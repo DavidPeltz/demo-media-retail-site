@@ -32,18 +32,18 @@
     
     // --------------------------------------------------------------------------
     // 1. Queue Initialization and Configuration Commands
-    
+
     // Initialize the SDK with the Site Token
     mics.push("init", "demo-media-retail-site"); 
+
+    // Explicitly add the user agent identifier (triggers cookie/vector logic)
+    mics.push("addIdentifier", "user_agent_id"); 
 
     // Enable client-side feeds (Standard practice)
     mics.push("call", "syncFeeds");
     
-    // Explicitly add the user agent identifier (triggers cookie/vector logic)
-    mics.push("addIdentifier", "user_agent_id"); 
-
     // --------------------------------------------------------------------------
-    // 2. Prepare Custom Event Payload
+    // 2. Prepare Event Payload
 
     var eventProperties = {};
     var eventType = 'Page View';
@@ -73,8 +73,7 @@
         }
     }
     
-    // 3. Queue the Custom Event
-    // We use the 'push' method for the event itself, which runs AFTER init/config commands.
+    // 3. Queue the Custom Event (This runs LAST, after all initialization commands)
     mics.push(eventType, eventProperties);
 </script>
 
