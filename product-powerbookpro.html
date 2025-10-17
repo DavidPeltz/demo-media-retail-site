@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerBook Pro 15" - Product View</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 20px; max-width: 900px; margin: 20px auto; }
+        nav { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        nav a { margin-right: 15px; text-decoration: none; color: #007bff; font-weight: bold; }
+        h1 { color: #333; }
+        .details p { margin: 5px 0; }
+        .product-details img { max-width: 400px; height: auto; margin-bottom: 20px; border-radius: 8px; }
+    </style>
+
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        'pageType': 'product_view',
+        'productDetail': {
+            'id': 'e3',
+            'sku': 'LPT001',
+            'name': 'PowerBook Pro 15"',
+            'price': 1599.00,
+            'category': 'Laptops',
+            'description': 'Professional laptop with high-end graphics and CPU.'
+        }
+    });
+    </script>
+    
+    <script>
+    var mR_site_token = 'demo-media-retail-site';
+    (function(a, b, c, d, e, f, g) {
+        a[e] = a[e] || function() {
+            (a[e].q = a[e].q || []).push(arguments);
+        };
+        f = b.createElement(c);
+        f.async = 1;
+        f.src = d;
+        g = b.getElementsByTagName(c)[0];
+        g.parentNode.insertBefore(f, g);
+    })(window, document, 'script', '//api.mediarithmics.com/datacollector.js', 'mR');
+    mR('setSiteToken', mR_site_token);
+    var eventProperties = {};
+    var eventType = 'Page View';
+    eventProperties.page_url = 'demo-media-retail-site.netlify.app' + window.location.pathname;
+    eventProperties.page_name = document.title;
+    if (window.dataLayer && window.dataLayer.length > 0) {
+        var dlData = window.dataLayer[window.dataLayer.length - 1]; 
+        if (dlData.pageType === 'product_view' && dlData.productDetail) {
+            eventType = 'Product View';
+            eventProperties.product_id = dlData.productDetail.id;
+            eventProperties.product_sku = dlData.productDetail.sku;
+            eventProperties.product_name = dlData.productDetail.name;
+            eventProperties.product_price = dlData.productDetail.price;
+            eventProperties.product_category = dlData.productDetail.category;
+        } else if (dlData.pageType === 'list_view') {
+            eventType = 'Product List View';
+            eventProperties.category_name = dlData.pageCategory;
+            eventProperties.product_list = dlData.productList; 
+        } else {
+            eventProperties.page_type = dlData.pageType; 
+        }
+    }
+    mR('track', eventType, eventProperties);
+</script>
+
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="phones.html">Phones</a>
+        <a href="laptops.html">Laptops</a>
+    </nav>
+    <h1>PowerBook Pro 15"</h1>
+    <p>This event fires a **'Product View'** event with full details for the PowerBook Pro.</p>
+    
+    <div class="product-details">
+        <img src="powerbookpro.png" alt="PowerBook Pro 15 Inch Product Image">
+        <h2>$1599.00</h2>
+        <p>Category: **Laptops**</p>
+        <p>SKU: **LPT001**</p>
+        <p>---</p>
+        <p>Description: The standard for creative professionals. Features a stunning Retina display and dedicated graphics for demanding tasks.</p>
+    </div>
+</body>
+</html>

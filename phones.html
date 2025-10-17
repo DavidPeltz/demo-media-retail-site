@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Hub - Phones</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 20px; max-width: 900px; margin: 20px auto; }
+        nav { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        nav a { margin-right: 15px; text-decoration: none; color: #007bff; font-weight: bold; }
+        h1 { color: #333; }
+        .product { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; overflow: hidden; }
+        .product h2 a { color: #007bff; text-decoration: none; }
+        .product-img { max-width: 100px; height: auto; float: left; margin-right: 15px; border-radius: 5px; }
+    </style>
+
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        'pageType': 'list_view',
+        'pageCategory': 'Phones',
+        'productList': [
+            { 'id': 'e1', 'sku': 'PHN001', 'name': 'Vertex X1 Phone', 'price': 999.00, 'category': 'Phones' },
+            { 'id': 'e2', 'sku': 'PHN002', 'name': 'Alpha 7 Mini Phone', 'price': 699.00, 'category': 'Phones' }
+        ]
+    });
+    </script>
+    
+    <script>
+    var mR_site_token = 'demo-media-retail-site';
+    (function(a, b, c, d, e, f, g) {
+        a[e] = a[e] || function() {
+            (a[e].q = a[e].q || []).push(arguments);
+        };
+        f = b.createElement(c);
+        f.async = 1;
+        f.src = d;
+        g = b.getElementsByTagName(c)[0];
+        g.parentNode.insertBefore(f, g);
+    })(window, document, 'script', '//api.mediarithmics.com/datacollector.js', 'mR');
+    mR('setSiteToken', mR_site_token);
+    var eventProperties = {};
+    var eventType = 'Page View';
+    eventProperties.page_url = 'demo-media-retail-site.netlify.app' + window.location.pathname;
+    eventProperties.page_name = document.title;
+    if (window.dataLayer && window.dataLayer.length > 0) {
+        var dlData = window.dataLayer[window.dataLayer.length - 1]; 
+        if (dlData.pageType === 'product_view' && dlData.productDetail) {
+            eventType = 'Product View';
+            eventProperties.product_id = dlData.productDetail.id;
+            eventProperties.product_sku = dlData.productDetail.sku;
+            eventProperties.product_name = dlData.productDetail.name;
+            eventProperties.product_price = dlData.productDetail.price;
+            eventProperties.product_category = dlData.productDetail.category;
+        } else if (dlData.pageType === 'list_view') {
+            eventType = 'Product List View';
+            eventProperties.category_name = dlData.pageCategory;
+            eventProperties.product_list = dlData.productList; 
+        } else {
+            eventProperties.page_type = dlData.pageType; 
+        }
+    }
+    mR('track', eventType, eventProperties);
+</script>
+
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="phones.html">Phones</a>
+        <a href="laptops.html">Laptops</a>
+    </nav>
+    <h1>Smartphones 📱</h1>
+    <p>This event fires a **'Product List View'** event containing the two phones listed below.</p>
+    
+    <div class="product">
+        <img src="vertexx1.png" alt="Vertex X1 Phone" class="product-img">
+        <h2><a href="product-vertexx1.html">Vertex X1 Phone</a></h2>
+        <p>Price: $999.00 | SKU: PHN001</p>
+        <p>Flagship performance with a stunning OLED display.</p>
+    </div>
+
+    <div class="product">
+        <img src="alpha7mini.png" alt="Alpha 7 Mini Phone" class="product-img">
+        <h2><a href="product-alpha7mini.html">Alpha 7 Mini Phone</a></h2>
+        <p>Price: $699.00 | SKU: PHN002</p>
+        <p>Compact power and long battery life.</p>
+    </div>
+</body>
+</html>

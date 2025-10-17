@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Hub - Laptops</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 20px; max-width: 900px; margin: 20px auto; }
+        nav { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        nav a { margin-right: 15px; text-decoration: none; color: #007bff; font-weight: bold; }
+        h1 { color: #333; }
+        .product { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; overflow: hidden; }
+        .product h2 a { color: #007bff; text-decoration: none; }
+        .product-img { max-width: 100px; height: auto; float: left; margin-right: 15px; border-radius: 5px; }
+    </style>
+
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        'pageType': 'list_view',
+        'pageCategory': 'Laptops',
+        'productList': [
+            { 'id': 'e3', 'sku': 'LPT001', 'name': 'PowerBook Pro 15"', 'price': 1599.00, 'category': 'Laptops' },
+            { 'id': 'e4', 'sku': 'LPT002', 'name': 'AirFlow Ultra 13"', 'price': 1199.00, 'category': 'Laptops' },
+            { 'id': 'e5', 'sku': 'LPT003', 'name': 'Gamer Rig Z', 'price': 2199.00, 'category': 'Laptops' }
+        ]
+    });
+    </script>
+    
+    <script>
+    var mR_site_token = 'demo-media-retail-site';
+    (function(a, b, c, d, e, f, g) {
+        a[e] = a[e] || function() {
+            (a[e].q = a[e].q || []).push(arguments);
+        };
+        f = b.createElement(c);
+        f.async = 1;
+        f.src = d;
+        g = b.getElementsByTagName(c)[0];
+        g.parentNode.insertBefore(f, g);
+    })(window, document, 'script', '//api.mediarithmics.com/datacollector.js', 'mR');
+    mR('setSiteToken', mR_site_token);
+    var eventProperties = {};
+    var eventType = 'Page View';
+    eventProperties.page_url = 'demo-media-retail-site.netlify.app' + window.location.pathname;
+    eventProperties.page_name = document.title;
+    if (window.dataLayer && window.dataLayer.length > 0) {
+        var dlData = window.dataLayer[window.dataLayer.length - 1]; 
+        if (dlData.pageType === 'product_view' && dlData.productDetail) {
+            eventType = 'Product View';
+            eventProperties.product_id = dlData.productDetail.id;
+            eventProperties.product_sku = dlData.productDetail.sku;
+            eventProperties.product_name = dlData.productDetail.name;
+            eventProperties.product_price = dlData.productDetail.price;
+            eventProperties.product_category = dlData.productDetail.category;
+        } else if (dlData.pageType === 'list_view') {
+            eventType = 'Product List View';
+            eventProperties.category_name = dlData.pageCategory;
+            eventProperties.product_list = dlData.productList; 
+        } else {
+            eventProperties.page_type = dlData.pageType; 
+        }
+    }
+    mR('track', eventType, eventProperties);
+</script>
+
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="phones.html">Phones</a>
+        <a href="laptops.html">Laptops</a>
+    </nav>
+    <h1>Laptops 💻</h1>
+    <p>This event fires a **'Product List View'** event containing the three laptops listed below.</p>
+    
+    <div class="product">
+        <img src="powerbookpro.png" alt="PowerBook Pro 15 Inch" class="product-img">
+        <h2><a href="product-powerbookpro.html">PowerBook Pro 15"</a></h2>
+        <p>Price: $1599.00 | SKU: LPT001</p>
+        <p>Unmatched power for creative professionals.</p>
+    </div>
+
+    <div class="product">
+        <img src="airflowultra.png" alt="AirFlow Ultra 13 Inch" class="product-img">
+        <h2><a href="product-airflowultra.html">AirFlow Ultra 13"</a></h2>
+        <p>Price: $1199.00 | SKU: LPT002</p>
+        <p>The ultimate lightweight machine for mobility.</p>
+    </div>
+    
+    <div class="product">
+        <img src="gamerrigz.png" alt="Gamer Rig Z" class="product-img">
+        <h2><a href="product-gamerrigz.html">Gamer Rig Z</a></h2>
+        <p>Price: $2199.00 | SKU: LPT003</p>
+        <p>Maximum performance for competitive gaming.</p>
+    </div>
+</body>
+</html>
