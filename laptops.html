@@ -33,16 +33,13 @@
     var site_token = 'demo-media-retail-site';
     // ----------------------------------------------------
 
-    // 1. SDK Loader: Uses the site_token to initialize the tracking platform
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    // 1. SDK Loader: Creates window.mics queue and starts loading mics.js
+    (function(w,d,s,l,i){w[l]=w[l]||[];var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://api.mediarithmics.com/mics.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer', site_token); 
 
-    // 2. Event Payload Preparation
-    window.mics = window.mics || [];
-    
+    // 2. Prepare Event Payload
     var eventProperties = {};
     var eventType = 'Page View';
     
@@ -50,12 +47,13 @@
     eventProperties.page_url = 'demo-media-retail-site.netlify.app' + window.location.pathname;
     eventProperties.page_name = document.title;
     
+    // Read the page-specific dataLayer content
     if (window.dataLayer && window.dataLayer.length > 0) {
         var dlData = window.dataLayer[window.dataLayer.length - 1]; 
         
         if (dlData.pageType === 'product_view' && dlData.productDetail) {
             eventType = 'Product View';
-            // Map product detail fields for the 'Product View' event
+            // Map product detail fields
             eventProperties.product_id = dlData.productDetail.id;
             eventProperties.product_sku = dlData.productDetail.sku;
             eventProperties.product_name = dlData.productDetail.name;
@@ -64,7 +62,7 @@
             
         } else if (dlData.pageType === 'list_view') {
             eventType = 'Product List View';
-            // Map category and product list for the 'Product List View' event
+            // Map category and product list
             eventProperties.category_name = dlData.pageCategory;
             eventProperties.product_list = dlData.productList; 
             
@@ -73,8 +71,9 @@
         }
     }
     
-    // 3. Push the 'track' command to the mics array
-    mics.push(['track', eventType, eventProperties]);
+    // 3. Push the 'track' command to the mics array queue
+    // The SDK will process this command once mics.js finishes loading.
+    window.mics.push(['track', eventType, eventProperties]);
 </script>
 
 </head>
