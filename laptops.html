@@ -31,8 +31,8 @@
     /* YOU SHOULD NOT EDIT THIS PART */
     !function(t,e,a){"use strict";var i=t.scimhtiraidem||{};function s(t){var e=i[a]||{};i[a]=e,e[t]||(e[t]=function(){i._queue[a].push({method:t,args:Array.prototype.slice.apply(arguments)})})}t.googletag=t.googletag||{},t.googletag.cmd=t.googletag.cmd||[],t.googletag.cmd.push(function(){var e=t.localStorage.getItem("mics_sgmts"),a=JSON.parse(e),i=a||{};Object.keys(i).forEach(function(e){t.googletag.pubads().setTargeting("mics_"+e,i[e].map(String))})});var r="init call config push pushDefault addIdentifier addProperties addProperty onFinish onStart _reset".split(" ");i._queue=i._queue||{},i._names=i._names||[],i._names.push(a),i._queue[a]=i._queue[a]||[],i._startTime=(new Date).getTime(),i._snippetVersion="2.0";for(var o=0;o<r.length;o++)s(r[o]);t.scimhtiraidem=i,t[a]=i[a];var n=e.createElement("script");n.setAttribute("type","text/javascript"),n.setAttribute("src","https://static.mediarithmics.com/tag/2/tag.min.js"),n.setAttribute("async","true"),e.getElementsByTagName("script")[0].parentNode.appendChild(n)}(window,document,"demo-media-retail-site");
     
-    // The object name is now correctly defined as 'demo-media-retail-site'
-    demo-media-retail-site.init({ mode: "VISIT", site_token: "demo-media-retail-site", domain_name: "demo-media-retail-site.netlify.app" });
+    // 1. Replaced umbrella_corp with demo-media-retail-site
+    demo-media-retail-site.init("demo-media-retail-site");
     
     // Enables client-side feeds
     demo-media-retail-site.call("syncFeeds");
@@ -41,7 +41,7 @@
     
     // --- START CUSTOM CODE ---
     
-    // Remove the original pushDefault call (or it will fire a duplicate event)
+    // Remove the original pushDefault call
     // demo-media-retail-site.pushDefault(); 
 
     var eventProperties = {};
@@ -73,7 +73,7 @@
         }
     }
     
-    // Queue the Custom Event using the correctly prefixed function
+    // Queue the Custom Event using the corrected object prefix
     demo-media-retail-site.push(eventType, eventProperties);
 
     // --- END CUSTOM CODE ---
