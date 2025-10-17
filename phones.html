@@ -30,7 +30,7 @@
     /* YOU SHOULD NOT EDIT THIS PART */
     !function(t,e,a){"use strict";var i=t.scimhtiraidem||{};function s(t){var e=i[a]||{};i[a]=e,e[t]||(e[t]=function(){i._queue[a].push({method:t,args:Array.prototype.slice.apply(arguments)})})}t.googletag=t.googletag||{},t.googletag.cmd=t.googletag.cmd||[],t.googletag.cmd.push(function(){var e=t.localStorage.getItem("mics_sgmts"),a=JSON.parse(e),i=a||{};Object.keys(i).forEach(function(e){t.googletag.pubads().setTargeting("mics_"+e,i[e].map(String))})});var r="init call config push pushDefault addIdentifier addProperties addProperty onFinish onStart _reset".split(" ");i._queue=i._queue||{},i._names=i._names||[],i._names.push(a),i._queue[a]=i._queue[a]||[],i._startTime=(new Date).getTime(),i._snippetVersion="2.0";for(var o=0;o<r.length;o++)s(r[o]);t.scimhtiraidem=i,t[a]=i[a];var n=e.createElement("script");n.setAttribute("type","text/javascript"),n.setAttribute("src","https://static.mediarithmics.com/tag/2/tag.min.js"),n.setAttribute("async","true"),e.getElementsByTagName("script")[0].parentNode.appendChild(n)}(window,document,"demomediaretailsite");
     
-    // 1. Replaced umbrella_corp with demo-media-retail-site
+    // 1. Initialization (Untouched)
     demomediaretailsite.init("demo-media-retail-site");
     
     // Enables client-side feeds
@@ -40,15 +40,18 @@
     
     // --- START CUSTOM CODE ---
     
-    // Remove the original pushDefault call
-    // demo-media-retail-site.pushDefault(); 
+    // demomediaretailsite.pushDefault(); 
 
-    var eventProperties = {};
     var eventType = 'Page View';
     
-    // Set default page context properties
-    eventProperties.page_url = 'demo-media-retail-site.netlify.app' + window.location.pathname;
-    eventProperties.page_name = document.title;
+    // Define three separate objects to pass as arguments
+    var pageContext = {};
+    var productDetails = {};
+    var listDetails = {};
+    
+    // 1. Always define the basic page context
+    pageContext.page_url = 'https://demo-media-retail-site.netlify.app' + window.location.pathname;
+    pageContext.page_name = document.title;
     
     // Read the page-specific dataLayer content
     if (window.dataLayer && window.dataLayer.length > 0) {
@@ -56,24 +59,44 @@
         
         if (dlData.pageType === 'product_view' && dlData.productDetail) {
             eventType = 'Product View';
-            eventProperties.product_id = dlData.productDetail.id;
-            eventProperties.product_sku = dlData.productDetail.sku;
-            eventProperties.product_name = dlData.productDetail.name;
-            eventProperties.product_price = dlData.productDetail.price;
-            eventProperties.product_category = dlData.productDetail.category;
+            
+            // Populate Product Detail Object
+            productDetails.product_id = dlData.productDetail.id;
+            productDetails.product_sku = dlData.productDetail.sku;
+            productDetails.product_name = dlData.productDetail.name;
+            productDetails.product_price = dlData.productDetail.price;
+            productDetails.product_category = dlData.productDetail.category;
+            
+            pageContext.page_type = dlData.pageType;
             
         } else if (dlData.pageType === 'list_view') {
             eventType = 'Product List View';
-            eventProperties.category_name = dlData.pageCategory;
-            eventProperties.product_list = dlData.productList; 
+            
+            // Populate List Detail Object
+            listDetails.category_name = dlData.pageCategory;
+            listDetails.product_list = dlData.productList; 
+            
+            pageContext.page_type = dlData.pageType;
             
         } else {
-            eventProperties.page_type = dlData.pageType; 
+            eventType = 'Page View';
+            pageContext.page_type = dlData.pageType; 
         }
     }
     
-    // Queue the Custom Event using the corrected object prefix
-    demomediaretailsite.push(eventType, eventProperties);
+    // --- FINAL PUSH LOGIC ---
+    if (eventType === 'Product View') {
+        // Send eventType, Page Context, and Product Details as separate arguments
+        demomediaretailsite.push(eventType, pageContext, productDetails);
+        
+    } else if (eventType === 'Product List View') {
+        // Send eventType, Page Context, and List Details as separate arguments
+        demomediaretailsite.push(eventType, pageContext, listDetails);
+        
+    } else {
+        // Send eventType and Page Context only
+        demomediaretailsite.push(eventType, pageContext);
+    }
 
     // --- END CUSTOM CODE ---
 </script>
