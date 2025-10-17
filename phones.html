@@ -27,40 +27,53 @@
     </script>
     
     <script>
-    var mR_site_token = 'demo-media-retail-site';
-    (function(a, b, c, d, e, f, g) {
-        a[e] = a[e] || function() {
-            (a[e].q = a[e].q || []).push(arguments);
-        };
-        f = b.createElement(c);
-        f.async = 1;
-        f.src = d;
-        g = b.getElementsByTagName(c)[0];
-        g.parentNode.insertBefore(f, g);
-    })(window, document, 'script', '//api.mediarithmics.com/datacollector.js', 'mR');
-    mR('setSiteToken', mR_site_token);
+    // ----------------------------------------------------
+    // Site Token: Used directly in the SDK loader
+    var site_token = 'demo-media-retail-site';
+    // ----------------------------------------------------
+
+    // 1. SDK Loader: Uses the site_token to initialize the tracking platform
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://api.mediarithmics.com/mics.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer', site_token); 
+
+    // 2. Event Payload Preparation
+    window.mics = window.mics || [];
+    
     var eventProperties = {};
     var eventType = 'Page View';
+    
+    // Set default page context properties
     eventProperties.page_url = 'demo-media-retail-site.netlify.app' + window.location.pathname;
     eventProperties.page_name = document.title;
+    
     if (window.dataLayer && window.dataLayer.length > 0) {
         var dlData = window.dataLayer[window.dataLayer.length - 1]; 
+        
         if (dlData.pageType === 'product_view' && dlData.productDetail) {
             eventType = 'Product View';
+            // Map product detail fields for the 'Product View' event
             eventProperties.product_id = dlData.productDetail.id;
             eventProperties.product_sku = dlData.productDetail.sku;
             eventProperties.product_name = dlData.productDetail.name;
             eventProperties.product_price = dlData.productDetail.price;
             eventProperties.product_category = dlData.productDetail.category;
+            
         } else if (dlData.pageType === 'list_view') {
             eventType = 'Product List View';
+            // Map category and product list for the 'Product List View' event
             eventProperties.category_name = dlData.pageCategory;
             eventProperties.product_list = dlData.productList; 
+            
         } else {
             eventProperties.page_type = dlData.pageType; 
         }
     }
-    mR('track', eventType, eventProperties);
+    
+    // 3. Push the 'track' command to the mics array
+    mics.push(['track', eventType, eventProperties]);
 </script>
 
 </head>
