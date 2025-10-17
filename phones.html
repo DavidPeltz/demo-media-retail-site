@@ -31,19 +31,23 @@
     !function(t,e,a){"use strict";var i=t.scimhtiraidem||{};function s(t){var e=i[a]||{};i[a]=e,e[t]||(e[t]=function(){i._queue[a].push({method:t,args:Array.prototype.slice.apply(arguments)})})}t.googletag=t.googletag||{},t.googletag.cmd=t.googletag.cmd||[],t.googletag.cmd.push(function(){var e=t.localStorage.getItem("mics_sgmts"),a=JSON.parse(e),i=a||{};Object.keys(i).forEach(function(e){t.googletag.pubads().setTargeting("mics_"+e,i[e].map(String))})});var r="init call config push pushDefault addIdentifier addProperties addProperty onFinish onStart _reset".split(" ");i._queue=i._queue||{},i._names=i._names||[],i._names.push(a),i._queue[a]=i._queue[a]||[],i._startTime=(new Date).getTime(),i._snippetVersion="2.0";for(var o=0;o<r.length;o++)s(r[o]);t.scimhtiraidem=i,t[a]=i[a];var n=e.createElement("script");n.setAttribute("type","text/javascript"),n.setAttribute("src","https://static.mediarithmics.com/tag/2/tag.min.js"),n.setAttribute("async","true"),e.getElementsByTagName("script")[0].parentNode.appendChild(n)}(window,document,"mics");
     
     // --------------------------------------------------------------------------
-    // 1. Initialize with the correct Site Token (Alias)
-    mics.init("demo-media-retail-site"); 
-
-    // Enables client-side feeds (Standard practice)
-    mics.call("syncFeeds");
+    // 1. Queue Initialization and Configuration Commands
     
+    // Initialize the SDK with the Site Token
+    mics.push("init", "demo-media-retail-site"); 
+
+    // Enable client-side feeds (Standard practice)
+    mics.push("call", "syncFeeds");
+    
+    // Explicitly add the user agent identifier (triggers cookie/vector logic)
+    mics.push("addIdentifier", "user_agent_id"); 
+
     // --------------------------------------------------------------------------
-    // 2. Prepare and Fire Custom Event (Replacing pushDefault)
+    // 2. Prepare Custom Event Payload
 
     var eventProperties = {};
     var eventType = 'Page View';
     
-    // Set default page context properties
     eventProperties.page_url = 'demo-media-retail-site.netlify.app' + window.location.pathname;
     eventProperties.page_name = document.title;
     
@@ -69,9 +73,9 @@
         }
     }
     
-    // 3. Push the custom event to the mics queue
-    // This uses the 'push' method defined in the SDK loader above.
-    mics.push([eventType, eventProperties]);
+    // 3. Queue the Custom Event
+    // We use the 'push' method for the event itself, which runs AFTER init/config commands.
+    mics.push(eventType, eventProperties);
 </script>
 
 </head>
