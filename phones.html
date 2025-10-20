@@ -42,7 +42,6 @@
     
     // Function to check if the Mediarithmics visitor ID cookie (mics_vid) exists
     function checkMicsUserCookie() {
-        // Look for the 'mics_vid=' cookie which contains the visitor ID
         return document.cookie.includes('mics_vid=');
     }
 
@@ -56,8 +55,6 @@
         demomediaretailsite.push("$set_user_choice", userConsent);
     }
     
-    // demomediaretailsite.pushDefault(); 
-
     var eventType = 'Page View';
     
     // Define separate objects for retail event data
@@ -76,23 +73,30 @@
         if (dlData.pageType === 'product_view' && dlData.productDetail) {
             eventType = 'Product View';
             
-            // Populate Product Detail Object
-            productDetails.product_id = dlData.productDetail.id;
-            productDetails.product_sku = dlData.productDetail.sku;
-            productDetails.product_name = dlData.productDetail.name;
-            productDetails.product_price = dlData.productDetail.price;
-            productDetails.product_category = dlData.productDetail.category;
+            // Populate Product Detail Object, MAPPING TO SCHEMA NAMES
+            productDetails.id = dlData.productDetail.id; 
+            productDetails.$category1 = dlData.productDetail.category; // Maps to schema category1
+            productDetails.$name = dlData.productDetail.name;         // Maps to schema name
+            productDetails.$price = dlData.productDetail.price;       // Maps to schema price
+            // Note: SKU, original category, etc., are kept in the 'productDetails' event object,
+            // but the schema only cares about those four specific fields.
             
             pageContext.page_type = dlData.pageType;
+            
+            // NEW: Add top-level category property for filtering/reporting
+            pageContext.$category1 = dlData.productDetail.category;
             
         } else if (dlData.pageType === 'list_view') {
             eventType = 'Product List View';
             
             // Populate List Detail Object
-            listDetails.category_name = dlData.pageCategory;
+            listDetails.category_name = dlData.pageCategory; // Keep original category detail for list filtering
             listDetails.product_list = dlData.productList; 
             
             pageContext.page_type = dlData.pageType;
+            
+            // NEW: Add top-level category property for filtering/reporting
+            pageContext.$category1 = dlData.pageCategory;
             
         } else {
             eventType = 'Page View';
@@ -102,11 +106,11 @@
     
     // 3. FINAL PUSH LOGIC (Retail Events)
     if (eventType === 'Product View') {
-        // Send eventType, Page Context, and Product Details as separate arguments
+        // Send eventType, Page Context (with $category1), and Product Details
         demomediaretailsite.push(eventType, pageContext, productDetails);
         
     } else if (eventType === 'Product List View') {
-        // Send eventType, Page Context, and List Details as separate arguments
+        // Send eventType, Page Context (with $category1), and List Details
         demomediaretailsite.push(eventType, pageContext, listDetails);
         
     } else {
