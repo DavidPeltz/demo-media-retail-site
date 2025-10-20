@@ -73,7 +73,7 @@ if (window.dataLayer && window.dataLayer.length > 0) {
         listDetails.product_list = dlData.productList.map(function(item) {
              return {
                 id: item.id,
-                sku: item.sku,
+               // sku: item.sku,
                 name: item.name,
                 category: item.category,
                 price: parseFloat(item.price) // Ensure price is float in list view too
