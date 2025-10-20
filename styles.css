@@ -34,13 +34,17 @@ h1 {
 /* ==================================== */
 
 header {
-    background-color: #0d1a26; 
-    padding: 10px 20px;
-    color: white;
+    /* CHANGE: Background to White/Light Gray */
+    background-color: #ffffff; 
+    /* Adjust padding to frame the logo */
+    padding: 15px 20px; 
+    /* REMOVE: fixed white text color */
+    color: #333; 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
     margin-bottom: 30px;
+    border-bottom: 1px solid #ddd; /* Optional: Add a subtle line to separate it from the content */
 }
 
 .site-logo {
@@ -50,7 +54,8 @@ header {
 }
 
 .main-nav a {
-    color: #88c0ff; 
+    /* CHANGE: Link color to a dark blue/primary color */
+    color: #007bff; 
     text-decoration: none;
     font-weight: bold;
     margin-left: 25px; 
@@ -59,8 +64,9 @@ header {
 }
 
 .main-nav a:hover {
-    color: #ffffff;
-    border-bottom: 2px solid #ffffff; 
+    /* CHANGE: Hover color to a darker shade of blue/black */
+    color: #333;
+    border-bottom: 2px solid #007bff; 
 }
 
 /* ==================================== */
