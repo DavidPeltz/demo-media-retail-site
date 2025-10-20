@@ -1,11 +1,10 @@
 /*
  * Base Styling for Demo Media Retail Site
- * Includes styling for header, navigation, and base components.
  *
- * NOTE: The following styles have been ADDED/MODIFIED for mobile responsiveness:
- * 1. .padded-container: Adds padding to prevent content hitting screen edges.
- * 2. .category-grid: Implements stacking on small screens.
- * 3. .product-grid: Implements a 2-column then 1-column stack on small screens.
+ * MODIFICATIONS:
+ * 1. .padded-container: New class for mobile horizontal padding.
+ * 2. Mobile media queries for .category-grid and .product-grid to handle stacking.
+ * 3. **.product-grid** adjusted to display in **2 columns** on desktop.
  */
 
 /* --- BASE STYLES --- */
@@ -59,7 +58,7 @@ h2 {
 
 /* --- RESPONSIVENESS ADDITIONS (PADDED CONTAINER) --- */
 
-/* Class to ensure content doesn't hit the screen edge on mobile and centers on desktop */
+/* NEW: Class to ensure content doesn't hit the screen edge on mobile and centers on desktop */
 .padded-container {
     max-width: 1400px;
     margin-left: auto;
@@ -68,7 +67,7 @@ h2 {
     padding-right: 1.5rem; /* Default spacing */
 }
 
-/* Tighter spacing for very small mobile screens */
+/* NEW: Tighter spacing for very small mobile screens */
 @media (max-width: 576px) {
     .padded-container {
         padding-left: 1rem;
@@ -79,7 +78,7 @@ h2 {
 
 /* --- CATEGORY PAGE STYLES --- */
 
-/* Default desktop layout (3 columns) */
+/* Original: Desktop 3-column grid */
 .category-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
@@ -115,21 +114,21 @@ h2 {
     color: #004d99;
 }
 
-/* Mobile Stacking for Category Cards */
+/* NEW: Mobile Stacking for Category Cards */
 @media (max-width: 768px) {
     .category-grid {
-        grid-template-columns: 1fr; /* Forces a single column stack */
-        gap: 20px; /* Reduced gap for mobile */
+        grid-template-columns: 1fr; /* Forces a single column stack on tablet/mobile */
+        gap: 20px;
     }
 }
 
 
 /* --- PRODUCT LIST STYLES --- */
 
-/* Default desktop product list layout (4 columns) */
+/* MODIFIED: Desktop 2-column grid */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(2, 1fr); 
     gap: 25px;
     margin-top: 20px;
 }
@@ -183,16 +182,10 @@ h2 {
     background-color: #007bb5;
 }
 
-/* Mobile Stacking for Product Cards */
-@media (max-width: 992px) {
-    .product-grid {
-        grid-template-columns: repeat(3, 1fr); /* Switch to 3 columns on tablets/mid-sized screens */
-    }
-}
-
+/* NEW: Mobile Layout for Product Cards */
 @media (max-width: 768px) {
     .product-grid {
-        grid-template-columns: repeat(2, 1fr); /* Switch to 2 columns on most phones */
+        grid-template-columns: repeat(2, 1fr); /* Remains 2 columns on tablets/mid-sized screens */
         gap: 15px; 
     }
 }
@@ -203,6 +196,7 @@ h2 {
         gap: 10px;
     }
 }
+
 
 /* --- PRODUCT DETAIL STYLES --- */
 .product-detail-container {
