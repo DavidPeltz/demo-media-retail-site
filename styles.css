@@ -3,6 +3,26 @@
  * Consolidated styles for Tech Hub demo site.
  */
 
+ /* --- NEW: RESPONSIVENESS ADDITIONS (PADDED CONTAINER) --- */
+
+/* Class to ensure content is centered and has horizontal padding */
+.padded-container {
+    max-width: 1400px; /* Optional: Keep content from getting too wide on huge screens */
+    margin-left: auto;
+    margin-right: auto;
+    /* Default spacing for screens */
+    padding-left: 1.5rem; 
+    padding-right: 1.5rem; 
+}
+
+/* Tighter spacing for very small mobile screens */
+@media (max-width: 576px) {
+    .padded-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
 /* ==================================== */
 /* 1. BASE AND LAYOUT STYLES (Applies to all pages) */
 /* ==================================== */
