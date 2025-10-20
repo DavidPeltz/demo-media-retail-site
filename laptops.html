@@ -4,15 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Hub - Laptops</title>
-    <style>
-        body { font-family: sans-serif; margin: 0; padding: 20px; max-width: 900px; margin: 20px auto; }
-        nav { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        nav a { margin-right: 15px; text-decoration: none; color: #007bff; font-weight: bold; }
-        h1 { color: #333; }
-        .product { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; overflow: hidden; }
-        .product h2 a { color: #007bff; text-decoration: none; }
-        .product-img { max-width: 100px; height: auto; float: left; margin-right: 15px; border-radius: 5px; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -31,11 +23,18 @@
 
 </head>
 <body>
-    <nav>
+    <header>
+    <div class="logo-container">
+        <a href="index.html"> 
+            <img src="img/logo.png" alt="Tech Hub Logo" class="site-logo">
+        </a>
+    </div>
+    <nav class="main-nav">
         <a href="index.html">Home</a>
         <a href="phones.html">Phones</a>
         <a href="laptops.html">Laptops</a>
     </nav>
+</header>
     <h1>Laptops 💻</h1>
     <p>This page fires a **'Product List View'** event containing the three laptops listed below.</p>
     

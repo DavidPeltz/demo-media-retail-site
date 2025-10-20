@@ -4,62 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Hub - Home</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 20px; max-width: 1000px; margin: 20px auto; background-color: #f7f7f7; color: #333; }
-        nav { margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 15px; }
-        nav a { margin-right: 25px; text-decoration: none; color: #007bff; font-weight: bold; transition: color 0.2s; }
-        nav a:hover { color: #0056b3; }
-        h1 { color: #222; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 30px; }
-
-        /* New Styling for the Storefront */
-        .category-grid {
-            display: flex;
-            gap: 30px;
-            margin-top: 30px;
-        }
-        .category-card {
-            flex: 1;
-            padding: 30px;
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-        .category-card h2 {
-            font-size: 1.8em;
-            color: #007bff;
-            margin-top: 0;
-        }
-        .category-card p {
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .category-card a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 
     <script defer src="mediarithmics-tracker.js"></script>
 
+    <link rel="icon" href="/favicon.png" type="image/png">
+
 </head>
 <body>
-    <nav>
+    <header>
+    <div class="logo-container">
+        <a href="index.html"> 
+            <img src="img/logo.png" alt="Tech Hub Logo" class="site-logo">
+        </a>
+    </div>
+    <nav class="main-nav">
         <a href="index.html">Home</a>
         <a href="phones.html">Phones</a>
         <a href="laptops.html">Laptops</a>
     </nav>
+</header>
     <h1>Welcome to Tech Hub! ⚡</h1>
     <p>Your destination for the latest in mobile and computing technology. This page fires a **'Page View'** event.</p>
     

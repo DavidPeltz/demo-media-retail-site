@@ -4,14 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gamer Rig Z - Product View</title>
-    <style>
-        body { font-family: sans-serif; margin: 0; padding: 20px; max-width: 900px; margin: 20px auto; }
-        nav { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        nav a { margin-right: 15px; text-decoration: none; color: #007bff; font-weight: bold; }
-        h1 { color: #333; }
-        .details p { margin: 5px 0; }
-        .product-details img { max-width: 400px; height: auto; margin-bottom: 20px; border-radius: 8px; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -32,11 +25,18 @@
 
 </head>
 <body>
-    <nav>
+    <header>
+    <div class="logo-container">
+        <a href="index.html"> 
+            <img src="img/logo.png" alt="Tech Hub Logo" class="site-logo">
+        </a>
+    </div>
+    <nav class="main-nav">
         <a href="index.html">Home</a>
         <a href="phones.html">Phones</a>
         <a href="laptops.html">Laptops</a>
     </nav>
+</header>
     <h1>Gamer Rig Z</h1>
     <p>This page fires a **'Product View'** event with full details for the Gamer Rig Z.</p>
     
