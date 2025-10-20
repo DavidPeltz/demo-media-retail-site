@@ -131,6 +131,13 @@ header {
     font-weight: bold;
 }
 
+/* NEW FIX: Force stacking on small screens to prevent uneven resizing */
+@media (max-width: 576px) {
+    .category-grid {
+        flex-direction: column; /* Stacks the cards vertically */
+    }
+}
+
 /* ==================================== */
 /* 4. PRODUCT LIST & DETAIL STYLES */
 /* ==================================== */
