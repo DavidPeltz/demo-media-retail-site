@@ -65,14 +65,22 @@
     
     // --- START CUSTOM CODE ---
     
-    // 1. ADD CONSENT EVENT using the documented $set_user_choice structure
-    var userConsent = {
-        $processing_token: "fillet-april", 
-        $choice_acceptance_value: true
-    };
-    // Push the consent event first
-    demomediaretailsite.push("$set_user_choice", userConsent);
+    // Function to check if the Mediarithmics visitor ID cookie (mics_vid) exists
+    function checkMicsUserCookie() {
+        // Look for the 'mics_vid=' cookie which contains the visitor ID
+        return document.cookie.includes('mics_vid=');
+    }
 
+    // 1. CONSENT LOGIC: Only send the $set_user_choice event if the cookie is NOT found.
+    if (!checkMicsUserCookie()) {
+        var userConsent = {
+            $processing_token: "fillet-april", 
+            $choice_acceptance_value: true
+        };
+        // Push the consent event only if the cookie doesn't exist
+        demomediaretailsite.push("$set_user_choice", userConsent);
+    }
+    
     // demomediaretailsite.pushDefault(); 
 
     var eventType = 'Page View';
