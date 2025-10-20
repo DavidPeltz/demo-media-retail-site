@@ -42,16 +42,24 @@
     
     // --- START CUSTOM CODE ---
     
+    // 1. ADD CONSENT EVENT using the documented $set_user_choice structure
+    var userConsent = {
+        $processing_token: "fillet-april", 
+        $choice_acceptance_value: true
+    };
+    // Push the consent event first
+    demomediaretailsite.push("$set_user_choice", userConsent);
+
     // demomediaretailsite.pushDefault(); 
 
     var eventType = 'Page View';
     
-    // Define three separate objects to pass as arguments
+    // Define separate objects for retail event data
     var pageContext = {};
     var productDetails = {};
     var listDetails = {};
     
-    // 1. Always define the basic page context
+    // 2. Always define the basic page context
     pageContext.page_url = 'https://demo-media-retail-site.netlify.app' + window.location.pathname;
     pageContext.page_name = document.title;
     
@@ -86,7 +94,7 @@
         }
     }
     
-    // --- FINAL PUSH LOGIC ---
+    // 3. FINAL PUSH LOGIC (Retail Events)
     if (eventType === 'Product View') {
         // Send eventType, Page Context, and Product Details as separate arguments
         demomediaretailsite.push(eventType, pageContext, productDetails);
