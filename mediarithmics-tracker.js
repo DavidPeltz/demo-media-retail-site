@@ -41,7 +41,7 @@ var listDetails = {};
 var finalProperties = {}; // Object used for the final merged payload
 
 // 2. Always define the basic page context
-pageContext.page_url = 'https://demo-media-retail-site.netlify.app' + window.location.pathname;
+pageContext.page_url = 'https://demo-media-retail-site.pages.dev' + window.location.pathname;
 pageContext.page_name = document.title;
 
 // Read the page-specific dataLayer content
