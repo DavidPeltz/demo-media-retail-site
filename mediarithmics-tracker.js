@@ -41,6 +41,7 @@ var listDetails = {};
 var finalProperties = {}; // Object used for the final merged payload
 
 // 2. Always define the basic page context
+// NOTE: page_url will be redundant with platform's $url but required for pageContext standardisation
 pageContext.page_url = 'https://demo-media-retail-site.pages.dev' + window.location.pathname;
 pageContext.page_name = document.title;
 
@@ -55,9 +56,13 @@ if (window.dataLayer && window.dataLayer.length > 0) {
         productDetails.id = dlData.productDetail.id; 
         productDetails.$category1 = dlData.productDetail.category; 
         productDetails.$name = dlData.productDetail.name;         
-        productDetails.$price = parseFloat(dlData.productDetail.price); // CRITICAL FIX: Cast to Float
+        // CRITICAL FIX: Ensure price is a float/number
+        productDetails.$price = parseFloat(dlData.productDetail.price); 
 
-        pageContext.page_type = dlData.pageType;
+        // REMOVED: page_type is redundant with the eventType name
+        // pageContext.page_type = dlData.pageType;
+        
+        // RETAINED: $category1 is the required schema property
         pageContext.$category1 = dlData.productDetail.category;
         
         // CRITICAL FIX: Merge pageContext and productDetails into one object
@@ -67,7 +72,8 @@ if (window.dataLayer && window.dataLayer.length > 0) {
         eventType = 'Product List View';
         
         // Populate List Detail Object
-        listDetails.category_name = dlData.pageCategory;
+        // NOTE: category_name is removed as it's redundant with $category1
+        // listDetails.category_name = dlData.pageCategory;
         
         // CRITICAL FIX: Ensure price is a number within the list payload
         listDetails.product_list = dlData.productList.map(function(item) {
@@ -80,7 +86,10 @@ if (window.dataLayer && window.dataLayer.length > 0) {
              };
         });
         
-        pageContext.page_type = dlData.pageType;
+        // REMOVED: page_type is redundant with the eventType name
+        // pageContext.page_type = dlData.pageType;
+        
+        // RETAINED: $category1 is the required schema property
         pageContext.$category1 = dlData.pageCategory;
         
         // CRITICAL FIX: Merge pageContext and listDetails into one object
