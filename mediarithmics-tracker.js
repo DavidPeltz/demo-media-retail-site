@@ -81,7 +81,8 @@ if (window.dataLayer && window.dataLayer.length > 0) {
                 id: item.id,
                // sku: item.sku,
                 name: item.name,
-                category: item.category,
+               // removing as page category already there
+               //  category: item.category,
                 price: parseFloat(item.price) // Ensure price is float in list view too
              };
         });
