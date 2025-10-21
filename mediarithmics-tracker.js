@@ -41,9 +41,11 @@ var listDetails = {};
 var finalProperties = {}; // Object used for the final merged payload
 
 // 2. Always define the basic page context
-// NOTE: page_url will be redundant with platform's $url but required for pageContext standardisation
-pageContext.page_url = 'https://demo-media-retail-site.pages.dev' + window.location.pathname;
-pageContext.page_name = document.title;
+// REMOVED: page_url (Redundant with platform's $url)
+// pageContext.page_url = 'https://demo-media-retail-site.pages.dev' + window.location.pathname;
+// REMOVED: page_name (Redundant with $name on product view, unnecessary elsewhere)
+// pageContext.page_name = document.title;
+
 
 // Read the page-specific dataLayer content
 if (window.dataLayer && window.dataLayer.length > 0) {
@@ -59,9 +61,6 @@ if (window.dataLayer && window.dataLayer.length > 0) {
         // CRITICAL FIX: Ensure price is a float/number
         productDetails.$price = parseFloat(dlData.productDetail.price); 
 
-        // REMOVED: page_type is redundant with the eventType name
-        // pageContext.page_type = dlData.pageType;
-        
         // RETAINED: $category1 is the required schema property
         pageContext.$category1 = dlData.productDetail.category;
         
@@ -81,14 +80,10 @@ if (window.dataLayer && window.dataLayer.length > 0) {
                 id: item.id,
                // sku: item.sku,
                 name: item.name,
-               // removing as page category already there
-               //  category: item.category,
+               // category: item.category,
                 price: parseFloat(item.price) // Ensure price is float in list view too
              };
         });
-        
-        // REMOVED: page_type is redundant with the eventType name
-        // pageContext.page_type = dlData.pageType;
         
         // RETAINED: $category1 is the required schema property
         pageContext.$category1 = dlData.pageCategory;
