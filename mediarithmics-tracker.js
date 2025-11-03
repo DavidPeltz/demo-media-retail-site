@@ -25,7 +25,7 @@ function checkMicsUserCookie() {
 // 1. CONSENT LOGIC: Only send the $set_user_choice event if the cookie is NOT found.
 if (!checkMicsUserCookie()) {
     var userConsent = {
-        $processing_token: "fillet-april", 
+        $processing_token: "sixteen-april", 
         $choice_acceptance_value: true
     };
     // Push the consent event only if the cookie doesn't exist
