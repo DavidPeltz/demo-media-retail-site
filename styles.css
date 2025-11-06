@@ -182,3 +182,58 @@ header {
     margin-bottom: 20px; 
     border-radius: 8px; 
 }
+
+/* ==================================== */
+/* 5. LOGIN/USER STYLES               */
+/* ==================================== */
+
+.login-area {
+  display: flex;
+  align-items: center;
+  margin-left: 20px; /* Add some space from the nav */
+}
+
+.login-form,
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-form input[type="email"] {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.login-form button,
+.user-info button {
+  padding: 8px 15px;
+  background-color: #007bff; /* Match site's primary color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-form button:hover,
+.user-info button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Style for the "logout" button to be less prominent */
+#logout-button {
+  background-color: #6c757d; /* A gray color */
+}
+
+#logout-button:hover {
+  background-color: #5a6268;
+}
+
+.user-info span {
+  font-weight: bold;
+  font-size: 0.9rem;
+}

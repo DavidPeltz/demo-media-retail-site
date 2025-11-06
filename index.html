@@ -13,18 +13,35 @@
   <body>
     <main>
       <div class="padded-container">
-        <header>
-          <div class="logo-container">
-            <a href="index.html">
-              <img src="/logo.png" alt="Tech Hub Logo" class="site-logo" />
-            </a>
-          </div>
-          <nav class="main-nav">
-            <a href="index.html">Home</a>
-            <a href="phones.html">Phones</a>
-            <a href="laptops.html">Laptops</a>
-          </nav>
-        </header>
+<header>
+  <div class="logo-container">
+    <a href="index.html">
+      <img src="/logo.png" alt="Tech Hub Logo" class="site-logo" />
+    </a>
+  </div>
+  <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="phones.html">Phones</a>
+    <a href="laptops.html">Laptops</a>
+  </nav>
+
+  <div class="login-area">
+    <form id="login-form" class="login-form">
+      <input
+        type="email"
+        id="login-email"
+        placeholder="Enter your email"
+        required
+      />
+      <button type="submit" id="login-button">Login</button>
+    </form>
+
+    <div id="user-info" class="user-info" style="display: none">
+      <span id="user-email-display"></span>
+      <button type="button" id="logout-button">Logout</button>
+    </div>
+  </div>
+  </header>
         <h1>Welcome to Tech Hub! ⚡</h1>
         <p>
           Your destination for the latest in mobile and computing technology.
