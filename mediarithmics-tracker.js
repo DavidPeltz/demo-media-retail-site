@@ -12,94 +12,34 @@ demomediaretailsite.init("demo-media-retail-site");
 // Enables client-side feeds
 demomediaretailsite.call("syncFeeds");
 
-/* CUSTOMIZE THE TAG CALL BELOW */
-
-// --- START CUSTOM CODE ---
-
-// Function to check if the Mediarithmics visitor ID cookie (mics_vid) exists
-function checkMicsUserCookie() {
-    // We check for the specific visitor ID cookie identified in your environment
-    return document.cookie.includes('mics_vid=');
-}
-
-// 1. CONSENT LOGIC: Only send the $set_user_choice event if the cookie is NOT found.
-if (!checkMicsUserCookie()) {
-    var userConsent = {
-        $processing_token: "fillet-april", 
-        $choice_acceptance_value: true
-    };
-    // Push the consent event only if the cookie doesn't exist
-    demomediaretailsite.push("$set_user_choice", userConsent);
-}
-
-var eventType = 'Page View';
-
-// Define objects for event data
-var pageContext = {};
-var productDetails = {};
-var listDetails = {};
-var finalProperties = {}; // Object used for the final merged payload
-
-// 2. Always define the basic page context
-// REMOVED: page_url (Redundant with platform's $url)
-// pageContext.page_url = 'https://demo-media-retail-site.pages.dev' + window.location.pathname;
-// REMOVED: page_name (Redundant with $name on product view, unnecessary elsewhere)
-// pageContext.page_name = document.title;
-
+var eventName = 'live_page_view';
+var properties = {}; 
 
 // Read the page-specific dataLayer content
 if (window.dataLayer && window.dataLayer.length > 0) {
     var dlData = window.dataLayer[window.dataLayer.length - 1]; 
     
     if (dlData.pageType === 'product_view' && dlData.productDetail) {
-        eventType = 'Product View';
-        
-        // Populate Product Detail Object, MAPPING TO SCHEMA NAMES ($category1, $name, $price)
-        productDetails.id = dlData.productDetail.id; 
-        productDetails.$category1 = dlData.productDetail.category; 
-        productDetails.$name = dlData.productDetail.name;         
-        // CRITICAL FIX: Ensure price is a float/number
-        productDetails.$price = parseFloat(dlData.productDetail.price); 
-
-        // RETAINED: $category1 is the required schema property
-        pageContext.$category1 = dlData.productDetail.category;
-        
-        // CRITICAL FIX: Merge pageContext and productDetails into one object
-        finalProperties = Object.assign({}, pageContext, productDetails);
+        eventName = 'live_product_view';
+        properties = {
+          "product" : {
+            "product_id" : dlData.productDetail.id,
+            "name" : dlData.productDetail.name,
+            "brand" : dlData.productDetail.brand,
+            "price"  : parseFloat(dlData.productDetail.price),
+            "category" : dlData.productDetail.category
+          } 
+        }
         
     } else if (dlData.pageType === 'list_view') {
-        eventType = 'Product List View';
-        
-        // Populate List Detail Object
-        // NOTE: category_name is removed as it's redundant with $category1
-        // listDetails.category_name = dlData.pageCategory;
-        
-        // CRITICAL FIX: Ensure price is a number within the list payload
-        listDetails.product_list = dlData.productList.map(function(item) {
-             return {
-                id: item.id,
-               // sku: item.sku,
-                name: item.name,
-               // category: item.category,
-                price: parseFloat(item.price) // Ensure price is float in list view too
-             };
-        });
-        
-        // RETAINED: $category1 is the required schema property
-        pageContext.$category1 = dlData.pageCategory;
-        
-        // CRITICAL FIX: Merge pageContext and listDetails into one object
-        finalProperties = Object.assign({}, pageContext, listDetails);
-        
-    } else {
-        eventType = 'Page View';
-        pageContext.page_type = dlData.pageType; 
-        // Home/General Page sends only pageContext
-        finalProperties = pageContext;
+        eventName = 'live_product_list_view';
+        properties = {
+          "category" : dlData.pageCategory
+        }
     }
 }
 
 // 3. FINAL PUSH LOGIC (Send the final merged object as the sole property argument)
-demomediaretailsite.push(eventType, finalProperties);
+demomediaretailsite.push(eventName, properties);
 
 // --- END CUSTOM CODE ---
