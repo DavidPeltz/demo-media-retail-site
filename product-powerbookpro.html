@@ -1,84 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PowerBook Pro 15" - Product View</title>
-    <link rel="stylesheet" href="styles.css" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PowerBook Pro 15" - Product View</title>
+        <link rel="stylesheet" href="styles.css" />
 
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      dataLayer.push({
-        pageType: "product_view",
-        productDetail: {
-          id: "LPT001",
-          sku: "LPT001",
-          name: 'PowerBook Pro 15"',
-          brand: 'Apple',
-          price: 1599.0,
-          category: "Laptops",
-          description: "Professional laptop with high-end graphics and CPU.",
-        },
-      });
-    </script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            dataLayer.push({
+                pageType: "product_view",
+                productDetail: {
+                    id: "LPT001",
+                    sku: "LPT001",
+                    name: 'PowerBook Pro 15"',
+                    brand: "Apple",
+                    price: 1599.0,
+                    category: "Laptops",
+                    description:
+                        "Professional laptop with high-end graphics and CPU.",
+                },
+            });
+        </script>
 
-    <script defer src="mediarithmics-tracker.js"></script>
+        <script src="mediarithmics-tracker.js"></script>
+        <script src="login-logic.js"></script>
+    </head>
+    <body>
+        <main>
+            <div class="padded-container">
+                <header>
+                    <div class="logo-container">
+                        <a href="index.html">
+                            <img
+                                src="/logo.png"
+                                alt="Tech Hub Logo"
+                                class="site-logo"
+                            />
+                        </a>
+                    </div>
+                    <nav class="main-nav">
+                        <a href="index.html">Home</a>
+                        <a href="phones.html">Phones</a>
+                        <a href="laptops.html">Laptops</a>
+                    </nav>
 
-    <script defer src="login-logic.js"></script>
-  </head>
-  <body>
-    <main>
-      <div class="padded-container">
-<header>
-  <div class="logo-container">
-    <a href="index.html">
-      <img src="/logo.png" alt="Tech Hub Logo" class="site-logo" />
-    </a>
-  </div>
-  <nav class="main-nav">
-    <a href="index.html">Home</a>
-    <a href="phones.html">Phones</a>
-    <a href="laptops.html">Laptops</a>
-  </nav>
+                    <div class="login-area">
+                        <form id="login-form" class="login-form">
+                            <input
+                                type="email"
+                                id="login-email"
+                                placeholder="Enter your email"
+                                required
+                            />
+                            <button type="submit" id="login-button">
+                                Login
+                            </button>
+                        </form>
 
-  <div class="login-area">
-    <form id="login-form" class="login-form">
-      <input
-        type="email"
-        id="login-email"
-        placeholder="Enter your email"
-        required
-      />
-      <button type="submit" id="login-button">Login</button>
-    </form>
+                        <div
+                            id="user-info"
+                            class="user-info"
+                            style="display: none"
+                        >
+                            <span id="user-email-display"></span>
+                            <button type="button" id="logout-button">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </header>
+                <h1>PowerBook Pro 15"</h1>
+                <p>
+                    This page fires a **'Product View'** event with full details
+                    for the PowerBook Pro.
+                </p>
 
-    <div id="user-info" class="user-info" style="display: none">
-      <span id="user-email-display"></span>
-      <button type="button" id="logout-button">Logout</button>
-    </div>
-  </div>
-  </header>
-        <h1>PowerBook Pro 15"</h1>
-        <p>
-          This page fires a **'Product View'** event with full details for the
-          PowerBook Pro.
-        </p>
-
-        <div class="product-details">
-          <img
-            src="powerbookpro.png"
-            alt="PowerBook Pro 15 Inch Product Image"
-          />
-          <h2>$1599.00</h2>
-          <p>Category: **Laptops**</p>
-          <p>SKU: **LPT001**</p>
-          <p>---</p>
-          <p>
-            Description: The standard for creative professionals. Features a
-            stunning Retina display and dedicated graphics for demanding tasks.
-          </p>
-        </div>
-      </div>
-    </main>
-  </body>
+                <div class="product-details">
+                    <img
+                        src="powerbookpro.png"
+                        alt="PowerBook Pro 15 Inch Product Image"
+                    />
+                    <h2>$1599.00</h2>
+                    <p>Category: **Laptops**</p>
+                    <p>SKU: **LPT001**</p>
+                    <p>---</p>
+                    <p>
+                        Description: The standard for creative professionals.
+                        Features a stunning Retina display and dedicated
+                        graphics for demanding tasks.
+                    </p>
+                </div>
+            </div>
+        </main>
+    </body>
 </html>

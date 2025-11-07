@@ -53,23 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
       // It links the current cookie (mics_vid) to the $email_hash identifier.
       if (window.demomediaretailsite) {
         
-        // Event 1: $user_identification
-        // This explicitly tells Mediarithmics to associate the hash with this user profile.
-        const identificationProps = {
-          $email_hash: hashedEmail
-          // You could also add the plain-text email if your schema supports it
-          // $email: email 
-        };
-        window.demomediaretailsite.push("$user_identification", identificationProps);
-        console.log("Pushed $user_identification event", identificationProps);
-
-        // Event 2: $user_login (as requested)
-        // This logs the specific action of logging in.
-        const loginProps = {
-          $email_hash: hashedEmail
-        };
-        window.demomediaretailsite.push("$user_login", loginProps);
-        console.log("Pushed $user_login event", loginProps);
+        window.demomediaretailsite.addIdentifier(
+            "USER_EMAIL",
+            { $email_hash: hashedEmail }
+        );
+        window.demomediaretailsite.push("login");
+        console.log("Pushed login event");
 
       } else {
         console.warn("Mediarithmics tracker (demomediaretailsite) not found.");
@@ -87,14 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutButton.addEventListener("click", () => {
     // 1. Clear the "session"
     sessionStorage.removeItem("demoUserEmail");
-
-    // 2. Send $user_logout event (good practice)
-    if (window.demomediaretailsite) {
-        window.demomediaretailsite.push("$user_logout");
-        console.log("Pushed $user_logout event");
-    }
-
-    // 3. Update the UI
     loginForm.style.display = "flex";
     userInfoDiv.style.display = "none";
     loginEmailInput.value = ""; // Clear input field

@@ -1,75 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tech Hub - Home</title>
-    <link rel="stylesheet" href="styles.css" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tech Hub - Home</title>
+        <link rel="stylesheet" href="styles.css" />
 
-    <script defer src="mediarithmics-tracker.js"></script>
+        <script src="mediarithmics-tracker.js"></script>
+        <script src="login-logic.js"></script>
 
-    <script defer src="login-logic.js"></script>
+        <link rel="icon" href="/favicon.png" type="image/png" />
+    </head>
+    <body>
+        <main>
+            <div class="padded-container">
+                <header>
+                    <div class="logo-container">
+                        <a href="index.html">
+                            <img
+                                src="/logo.png"
+                                alt="Tech Hub Logo"
+                                class="site-logo"
+                            />
+                        </a>
+                    </div>
+                    <nav class="main-nav">
+                        <a href="index.html">Home</a>
+                        <a href="phones.html">Phones</a>
+                        <a href="laptops.html">Laptops</a>
+                    </nav>
 
-    <link rel="icon" href="/favicon.png" type="image/png" />
-  </head>
-  <body>
-    <main>
-      <div class="padded-container">
-<header>
-  <div class="logo-container">
-    <a href="index.html">
-      <img src="/logo.png" alt="Tech Hub Logo" class="site-logo" />
-    </a>
-  </div>
-  <nav class="main-nav">
-    <a href="index.html">Home</a>
-    <a href="phones.html">Phones</a>
-    <a href="laptops.html">Laptops</a>
-  </nav>
+                    <div class="login-area">
+                        <form id="login-form" class="login-form">
+                            <input
+                                type="email"
+                                id="login-email"
+                                placeholder="Enter your email"
+                                required
+                            />
+                            <button type="submit" id="login-button">
+                                Login
+                            </button>
+                        </form>
 
-  <div class="login-area">
-    <form id="login-form" class="login-form">
-      <input
-        type="email"
-        id="login-email"
-        placeholder="Enter your email"
-        required
-      />
-      <button type="submit" id="login-button">Login</button>
-    </form>
+                        <div
+                            id="user-info"
+                            class="user-info"
+                            style="display: none"
+                        >
+                            <span id="user-email-display"></span>
+                            <button type="button" id="logout-button">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </header>
+                <h1>Welcome to Tech Hub! ⚡</h1>
+                <p>
+                    Your destination for the latest in mobile and computing
+                    technology. This page fires a **'Page View'** event.
+                </p>
 
-    <div id="user-info" class="user-info" style="display: none">
-      <span id="user-email-display"></span>
-      <button type="button" id="logout-button">Logout</button>
-    </div>
-  </div>
-  </header>
-        <h1>Welcome to Tech Hub! ⚡</h1>
-        <p>
-          Your destination for the latest in mobile and computing technology.
-          This page fires a **'Page View'** event.
-        </p>
+                <div class="category-grid">
+                    <div class="category-card">
+                        <h2>Smartphones 📱</h2>
+                        <p>
+                            Explore the newest devices with cutting-edge cameras
+                            and displays, featuring the Vertex X1 and Alpha 7
+                            Mini.
+                        </p>
+                        <a href="phones.html">View Phones</a>
+                    </div>
 
-        <div class="category-grid">
-          <div class="category-card">
-            <h2>Smartphones 📱</h2>
-            <p>
-              Explore the newest devices with cutting-edge cameras and displays,
-              featuring the Vertex X1 and Alpha 7 Mini.
-            </p>
-            <a href="phones.html">View Phones</a>
-          </div>
-
-          <div class="category-card">
-            <h2>Laptops 💻</h2>
-            <p>
-              High-performance machines for professionals and gamers, including
-              the PowerBook Pro and Gamer Rig Z.
-            </p>
-            <a href="laptops.html">View Laptops</a>
-          </div>
-        </div>
-      </div>
-    </main>
-  </body>
+                    <div class="category-card">
+                        <h2>Laptops 💻</h2>
+                        <p>
+                            High-performance machines for professionals and
+                            gamers, including the PowerBook Pro and Gamer Rig Z.
+                        </p>
+                        <a href="laptops.html">View Laptops</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
 </html>
